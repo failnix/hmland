@@ -5,13 +5,14 @@ FROM debian:buster-slim
 # Package version
 ARG HMCFGUSB_VER=0.103
 
+COPY hmcfgusb-$HMCFGUSB_VER.tar.gz /tmp
+
 # Install build packages
 #RUN apk add --no-cache --virtual=build-dependencies \
 #            build-base \
 RUN apt-get update && apt-get install -y --no-install-recommends build-essential libusb-dev libusb-1.0-0-dev libusb-1.0-0 wget \
 
 # Install app
- && wget http://git.zerfleddert.de/hmcfgusb/releases/hmcfgusb-$HMCFGUSB_VER.tar.gz -P /tmp \
  && mkdir /app \
  && tar -xzf /tmp/hmcfgusb-$HMCFGUSB_VER.tar.gz -C /app \
  && ln -s /app/hmcfgusb-$HMCFGUSB_VER /app/hmcfgusb \
